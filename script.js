@@ -72,6 +72,9 @@ function Book(title, author, pages, id, readstatus) {
   this.pages = pages;
   this.id = id;
   this.readstatus = readstatus;
+  this.test = function () {
+    alert("Test");
+  };
 }
 
 let myLibrary = [];
@@ -88,12 +91,14 @@ function addBook() {
     readstatus = "Not read";
   }
 
-  const book = Object.create(Book);
-  book.title = title.value;
-  book.author = author.value;
-  book.pages = pages.value;
-  book.id = myLibrary.length + 1;
-  book.readstatus = readstatus;
+  const book = new Book(
+    title.value,
+    author.value,
+    pages.value,
+    myLibrary.length + 1,
+    readstatus
+  );
+
   book.switchstatus = function () {
     if (this.readstatus === "Read") {
       return (this.readstatus = "Not read");
@@ -105,13 +110,3 @@ function addBook() {
   myLibrary.push(book);
   updateCollection();
 }
-
-//testing
-
-function Book2() {
-  this.shout = function () {
-    console.log("bakgui");
-  };
-}
-
-const test = Object.create(Book2);
